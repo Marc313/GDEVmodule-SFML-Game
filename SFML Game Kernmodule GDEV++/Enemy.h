@@ -4,7 +4,7 @@
 class Enemy : public Character
 {
 	public:
-		Enemy(int squareSize, sf::Color playerColor, Vector2 startPos);
+		Enemy(Vector2 size, sf::Color playerColor, Vector2 startPos);
 
 		virtual void onUpdate(sf::RenderWindow& window);
 		bool isOutOfScreen(sf::RenderWindow& window);
@@ -12,5 +12,7 @@ class Enemy : public Character
 
 	private:
 		RectRenderer rectRenderer;
+		float getRandomVelocityY();
 };
+
 

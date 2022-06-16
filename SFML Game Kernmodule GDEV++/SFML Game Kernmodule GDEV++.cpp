@@ -6,10 +6,15 @@ int main()
 {
     Game game = Game();
 
+    float oldTime = 0;
     while (game.isRunning())
     {
+        float newTime = clock();
+        float deltaTime = newTime - oldTime;
+        oldTime = newTime;
+
         // Update
-        game.onUpdate();
+        game.onUpdate(deltaTime);
     }
 
     return 0;

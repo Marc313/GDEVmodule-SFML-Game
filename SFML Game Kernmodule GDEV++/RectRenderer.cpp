@@ -6,7 +6,7 @@ RectRenderer::RectRenderer()
 	height = 100;
 }
 
-RectRenderer::RectRenderer(int rectWidth, int rectHeight, sf::Color shapeColor)
+RectRenderer::RectRenderer(float rectWidth, float rectHeight, sf::Color shapeColor)
 {
 	width = rectWidth;
 	height = rectHeight;

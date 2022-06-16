@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Enemy.h";
+#include "Enemy.h"
+#include "Player.h"
 #include <vector>
 #include "ScoreManager.h"
-
 
 class EnemyManager
 {
@@ -15,7 +15,7 @@ class EnemyManager
 		EnemyManager(int maxEnemies);
 		void SpawnEnemy(Vector2 windowSize);
 		void RespawnEnemy(Enemy& enemy, Vector2 windowSize);
-		void onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager);
+		void onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager, Player& player);
 
 	private:
 		Vector2 getRandomEnemySpawnPos(Vector2 windowSize);

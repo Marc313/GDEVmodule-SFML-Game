@@ -12,7 +12,7 @@ class Game
 		Game();
 		virtual ~Game();
 		void pollEvents();
-		void onUpdate();
+		void onUpdate(float deltaTime);
 		bool isRunning();
 
 	private:

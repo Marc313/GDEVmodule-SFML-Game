@@ -7,18 +7,20 @@
 class Player : public Character
 {
 	public:
+		// Constructor - Destructor
 		Player();
-		Player(float squareSize, sf::Color playerColor);
-
+		Player(Vector2 size, sf::Color playerColor);
 		Player& operator=(const Player& player);
 		
 		void onUpdate(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
 
+		// Setter
+		int getInputHorizontal();
+
 	private:
 		RectRenderer rectRenderer;
+		int horizontalInput;
 		
-		float input;
-		float getMouseInputX();
 };
 

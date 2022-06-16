@@ -8,8 +8,14 @@ Character::Character()
     position = startPos;
 }
 
+//Character::Character(Vector2 size, sf::Color shapeColor)
+//{
+//
+//}
+
 Character& Character::operator=(const Character& character)
 {
+    size = character.size;
     startPos = character.startPos;
     position = character.position;
     velocity = character.velocity;
@@ -28,8 +34,6 @@ Vector2 Character::calculateNewPosition() {
     if (Math::Abs(velocity.y) > friction) {
         movement.y = velocity.y - friction;
     }
-
-    std::cout << "Movement" + movement.to_string();
 
     return position + movement;
 }
