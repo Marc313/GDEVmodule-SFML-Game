@@ -10,15 +10,15 @@ class Game
 		Vector2 windowSize;
 
 		Game();
-		~Game();
+		virtual ~Game();
 		void pollEvents();
 		void onUpdate();
 		bool isRunning();
 
 	private:
-		Player* player;
-		EnemyManager* enemyManager;
-		ScoreManager* scoreManager;
+		Player player;
+		EnemyManager enemyManager;
+		ScoreManager scoreManager;
 
 		sf::RenderWindow* renderWindow;
 

@@ -10,6 +10,13 @@ Vector2::Vector2(float x, float y) {
 	this->y = y;
 }
 
+Vector2& Vector2::operator=(const Vector2& v)
+{
+	x = v.x;
+	y = v.y;
+	return *this;
+}
+
 sf::Vector2f Vector2::ToSFMLVector2f()
 {
 	return sf::Vector2f(x, y);
@@ -33,16 +40,4 @@ Vector2 Vector2::operator-(Vector2 otherVector)
 std::string Vector2::to_string() {
 	return "x: " + std::to_string(x) + " y: " + std::to_string(y) + "\n";
 }
-
-//Vector2 Vector2::operator+=(Vector2 otherVector)
-//{
-//	x + otherVector.x;
-//	y + otherVector.y;
-//}
-//
-//Vector2 Vector2::operator-=(Vector2 otherVector)
-//{
-//	x - otherVector.x;
-//	y - otherVector.y;
-//}
 

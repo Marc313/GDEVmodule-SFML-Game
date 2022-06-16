@@ -8,9 +8,6 @@ Game::Game()
 
 Game::~Game()
 {
-	delete player;
-	delete enemyManager;
-	delete scoreManager;
 	delete renderWindow;
 }
 
@@ -30,9 +27,9 @@ void Game::onUpdate()
 
 	renderWindow->clear();
 
-	player->onUpdate(*renderWindow);
-	enemyManager->onUpdate(*renderWindow, *scoreManager);
-	scoreManager->onUpdate(*renderWindow);
+	player.onUpdate(*renderWindow);
+	enemyManager.onUpdate(*renderWindow, scoreManager);
+	scoreManager.onUpdate(*renderWindow);
 
 	renderWindow->display();
 }
@@ -50,9 +47,9 @@ void Game::CreateWindow()
 
 void Game::StartGame()
 {
-	player = new Player(50.0f, sf::Color::Green);
-	enemyManager = new EnemyManager(5);
-	scoreManager = new ScoreManager();
+	player = Player(50.0f, sf::Color::Green);
+	enemyManager =  EnemyManager(5);
+	scoreManager =  ScoreManager();
 }
 
 

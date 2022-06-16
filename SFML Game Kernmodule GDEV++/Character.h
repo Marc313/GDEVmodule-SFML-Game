@@ -16,6 +16,7 @@ class Character
 
 		// Methods
 		Character();
+		Character& operator=(const Character& character);
 		Vector2 calculateNewPosition();
 		void onUpdate(sf::RenderWindow& window);
 

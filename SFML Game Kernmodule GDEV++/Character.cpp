@@ -1,9 +1,21 @@
 #include "Character.h";
 #include <IOStream>
+using namespace std;
 
 Character::Character() 
 {
+    startPos = Vector2();
     position = startPos;
+}
+
+Character& Character::operator=(const Character& character)
+{
+    startPos = character.startPos;
+    position = character.position;
+    velocity = character.velocity;
+    cout << "Character Assignment Operator" << endl;
+
+    return *this;
 }
 
 Vector2 Character::calculateNewPosition() {

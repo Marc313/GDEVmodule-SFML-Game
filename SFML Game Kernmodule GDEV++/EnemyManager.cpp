@@ -2,6 +2,10 @@
 #include <random>
 using namespace std;
 
+EnemyManager::EnemyManager() {
+	maxEnemies = 0;
+}
+
 EnemyManager::EnemyManager(int maxEnemies)
 {
 	this->maxEnemies = maxEnemies;

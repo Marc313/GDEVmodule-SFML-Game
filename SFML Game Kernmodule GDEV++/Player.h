@@ -7,14 +7,16 @@
 class Player : public Character
 {
 	public:
+		Player();
 		Player(float squareSize, sf::Color playerColor);
+
+		Player& operator=(const Player& player);
 		
 		void onUpdate(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
 
 	private:
 		RectRenderer rectRenderer;
-		const Vector2 startPos = Vector2(1000, 900);
 		
 		float input;
 		float getMouseInputX();

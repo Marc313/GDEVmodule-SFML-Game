@@ -2,10 +2,26 @@
 #include "Player.h";
 #include <IOStream>;
 
+Player::Player()
+{
+    input = 0;
+    startPos = Vector2(1000, 900);
+    position = startPos;
+}
+
 Player::Player(float squareSize, sf::Color playerColor)
 {
+    startPos = Vector2(1000, 900);
+    position = startPos;
     rectRenderer = RectRenderer((int)squareSize, (int)squareSize, playerColor);
-    this->position = startPos;
+}
+
+Player& Player::operator=(const Player& player)
+{
+    rectRenderer = player.rectRenderer;
+    //startPos = player.startPos;
+
+    return *this;
 }
 
 void Player::onUpdate(sf::RenderWindow& window) {

@@ -11,6 +11,7 @@ class EnemyManager
 		std::vector<Enemy> enemies;
 		int maxEnemies = 5;
 
+		EnemyManager();
 		EnemyManager(int maxEnemies);
 		void SpawnEnemy(Vector2 windowSize);
 		void RespawnEnemy(Enemy& enemy, Vector2 windowSize);
@@ -18,5 +19,6 @@ class EnemyManager
 
 	private:
 		Vector2 getRandomEnemySpawnPos(Vector2 windowSize);
+
 };
 
