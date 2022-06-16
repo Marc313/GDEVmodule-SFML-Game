@@ -1,8 +1,8 @@
 #pragma once
-#include "Vector2.h";
-#include "Player.h";
-#include "EnemyManager.h";
-#include "ScoreManager.h";
+#include "Vector2.h"
+#include "Player.h"
+#include "EnemyManager.h"
+#include "ScoreManager.h"
 
 class Game
 {

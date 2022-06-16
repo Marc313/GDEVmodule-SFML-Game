@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Vector2.h";
-#include "Character.h";
-#include <SFML/Graphics.hpp>;
+#include "Vector2.h"
+#include "Character.h"
+#include <SFML/Graphics.hpp>
 
 class Player : public Character
 {

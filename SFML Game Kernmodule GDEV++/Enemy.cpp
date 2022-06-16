@@ -8,12 +8,14 @@ Enemy::Enemy(Vector2 size, sf::Color enemyColor, Vector2 startPos)
 	this->size = size;
 	velocity.y = getRandomVelocityY();
 	position = startPos;
+	collider = BoxCollider(size, position);
 	rectRenderer = RectRenderer(size.x, size.y, enemyColor);
 }
 
 void Enemy::onUpdate(sf::RenderWindow& window)
 {
 	position = calculateNewPosition();
+	collider.updatePosition(position);
 	rectRenderer.SetShapePosition(position);
 
 	draw(window);

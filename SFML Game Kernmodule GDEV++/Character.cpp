@@ -1,9 +1,10 @@
-#include "Character.h";
+#include "Character.h"
 #include <IOStream>
 using namespace std;
 
 Character::Character() 
 {
+    collider = BoxCollider();
     startPos = Vector2();
     position = startPos;
 }

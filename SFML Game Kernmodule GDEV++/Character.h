@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Vector2.h";
-#include "PhysicsComponent.h";
-#include "ShapeRenderer.h";
-#include "RectRenderer.h";
-#include <SFML/Graphics.hpp>;
+#include "Vector2.h"
+#include "PhysicsComponent.h"
+#include "ShapeRenderer.h"
+#include "RectRenderer.h"
+#include <SFML/Graphics.hpp>
 #include "Math.h"
+#include "BoxCollider.h"
 
 class Character
 {
@@ -14,6 +15,7 @@ class Character
 		Vector2 size;
 		Vector2 position;
 		Vector2 velocity;
+		BoxCollider collider;
 
 		// Methods
 		Character();

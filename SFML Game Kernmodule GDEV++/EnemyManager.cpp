@@ -42,20 +42,10 @@ void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager
 		}
 		enemy.onUpdate(window);
 
-		// Check Player Collision
-		float playerTopY = player.position.y;
-		float playerBottomY = player.position.y + player.size.y;
-		float playerLeftX = player.position.x;
-		float playerRightX = player.position.x + player.size.y;
-
-		float enemyTopY = enemy.position.y;
-		float enemyBottomY = enemy.position.y + enemy.size.y;
-		float enemyLeftX = enemy.position.x;
-		float enemyRightX = enemy.position.x + enemy.size.y;
-
-		if (playerTopY < enemyBottomY && playerBottomY > playerTopY
-			&& playerLeftX < enemyLeftX && playerRightX > enemyLeftX) {
-			std::cout << "COLLISION" << std::endl;
+		// Check collision with Player
+		if (enemy.collider.isCollidingWith(player.collider)) {
+			cout << "COLLISION" << endl;
+			scoreManager.increaseScore(-1);
 		}
 	}
 
