@@ -14,6 +14,5 @@ class ScoreManager
 
 	private:
 		sf::Text text;
-		//void checkDifficultyIncrease();
 };
 

@@ -7,9 +7,6 @@
 class Game
 {
 	public:
-		Vector2 windowSize;
-		int difficulty;
-
 		// Public Variables //
 		Game();
 		virtual ~Game();
@@ -19,8 +16,10 @@ class Game
 		bool isRunning();
 
 		// Public Methods //
-		void onPlayerDied();
+		void checkDifficultyIncrease();
+		void checkPlayerLives();
 		void setDifficulty(int difficulty);
+		bool getHasEnded();
 
 	private:
 		// Private Variables //
@@ -28,13 +27,23 @@ class Game
 		EnemyManager enemyManager;
 		ScoreManager scoreManager;
 
-		sf::RenderWindow* renderWindow;
+		bool hasEnded;
+		int difficulty;
+		const float restartGameTime = 3.0f;
+		float restartTimer;
+
+		Vector2 windowSize;
+		sf::RenderWindow* window;
+		sf::Text gameOverText;
+		sf::Font font;
 
 		// Private Methods //
-		void CreateWindow();
-		void StartGame();
-		void EndGame();
+		void createWindow();
+		void initializeText();
+		void startGame();
+		void endGame();
 		void pollEvents();
+		void drawGameOverText();
 
 };
 

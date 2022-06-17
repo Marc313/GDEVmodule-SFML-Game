@@ -6,13 +6,15 @@
 
 Player::Player()
 {
+    lives = 1;
     horizontalInput = 0;
 }
 
 Player::Player(Vector2 playerSize, sf::Color playerColor)
 {
+    lives = 1;
     size = playerSize;
-    startPos = Vector2(1000, 900);
+    startPos = Vector2(500, 750);
     position = startPos;
     collider = BoxCollider(size, position);
     rectRenderer = RectRenderer((int) playerSize.x, (int) playerSize.y, playerColor);
@@ -21,9 +23,9 @@ Player::Player(Vector2 playerSize, sf::Color playerColor)
 Player& Player::operator=(const Player& player)
 {
     Character::operator=(player);
+    lives = player.lives;
     collider = player.collider;
     rectRenderer = player.rectRenderer;
-    //startPos = player.startPos;
 
     return *this;
 }
@@ -39,6 +41,17 @@ void Player::onUpdate(sf::RenderWindow& window) {
 void Player::draw(sf::RenderWindow& window)
 {
     rectRenderer.drawShape(window);
+}
+
+void Player::onCollision()
+{
+    // Set alpha lower for a few seconds
+    lives--;
+}
+
+int Player::getLives()
+{
+    return lives;
 }
 
 int Player::getInputHorizontal()

@@ -15,11 +15,14 @@ class Player : public Character
 		// Public Methods //
 		void onUpdate(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
+		void onCollision();
+		int getLives();
 
 	private:
 		// Private Variables //
 		RectRenderer rectRenderer;
 		int horizontalInput;
+		int lives;
 
 		// Private Methods //
 		int getInputHorizontal();

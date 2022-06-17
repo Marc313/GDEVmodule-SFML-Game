@@ -6,12 +6,12 @@ int main()
 {
     Game game = Game();
 
+    sf::Clock clock;
     float oldTime = 0;
     while (game.isRunning())
     {
-        float newTime = clock();
-        float deltaTime = newTime - oldTime;
-        oldTime = newTime;
+        float newTime = clock.restart().asSeconds();
+        float deltaTime = (newTime - oldTime);
 
         // Update
         game.onUpdate(deltaTime);

@@ -44,7 +44,7 @@ void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager
 
 		// Check collision with Player
 		if (enemy.collider.isCollidingWith(player.collider)) {
-			
+			player.onCollision();
 		}
 	}
 
