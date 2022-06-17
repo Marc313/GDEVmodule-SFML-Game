@@ -1,19 +1,20 @@
 #include "Enemy.h"
 #include <iostream>
-#include <random>
-using namespace std;
 
 Enemy::Enemy(Vector2 size, sf::Color enemyColor, Vector2 startPos)
 {
 	this->size = size;
-	velocity.y = getRandomVelocityY();
+	downwardForce = Vector2(0, Math::randomRange(3, 4));
 	position = startPos;
 	collider = BoxCollider(size, position);
 	rectRenderer = RectRenderer(size.x, size.y, enemyColor);
+	physicsComponent = PhysicsComponent(Math::randomRange(3, 5));
 }
 
 void Enemy::onUpdate(sf::RenderWindow& window)
 {
+	physicsComponent.addForce(downwardForce);
+	physicsComponent.onUpdate();
 	position = calculateNewPosition();
 	collider.updatePosition(position);
 	rectRenderer.SetShapePosition(position);
@@ -36,14 +37,4 @@ bool Enemy::isOutOfScreen(sf::RenderWindow& window)
 void Enemy::draw(sf::RenderWindow& window)
 {
 	rectRenderer.drawShape(window);
-}
-
-float Enemy::getRandomVelocityY() {
-	random_device rd;
-	mt19937 mt(rd());
-	uniform_real_distribution<float> dist(15, 20);
-
-	float randomY = dist(mt);
-
-	return randomY;
 }

@@ -14,7 +14,6 @@ class Character
 		// Variables
 		Vector2 size;
 		Vector2 position;
-		Vector2 velocity;
 		BoxCollider collider;
 
 		// Methods

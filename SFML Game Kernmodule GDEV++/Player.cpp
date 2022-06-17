@@ -16,8 +16,10 @@ Player::Player(Vector2 playerSize, sf::Color playerColor)
     size = playerSize;
     startPos = Vector2(500, 750);
     position = startPos;
+
     collider = BoxCollider(size, position);
     rectRenderer = RectRenderer((int) playerSize.x, (int) playerSize.y, playerColor);
+    physicsComponent = PhysicsComponent(.6f);
 }
 
 Player& Player::operator=(const Player& player)
@@ -32,9 +34,15 @@ Player& Player::operator=(const Player& player)
 
 void Player::onUpdate(sf::RenderWindow& window) {
     horizontalInput = getInputHorizontal();
-    position = Vector2(position.x + horizontalInput * 10, position.y);
+    physicsComponent.addForce(Vector2(3 * horizontalInput, 0));
+    physicsComponent.onUpdate();
+    std::cout << "Acceleration: " + physicsComponent.acceleration.to_string() << std::endl;
+    std::cout << "Velocity: " + physicsComponent.velocity.to_string() << std::endl;
+    position = calculateNewPosition();
+
     collider.updatePosition(position);
     rectRenderer.SetShapePosition(position);
+
     draw(window);
 }
 

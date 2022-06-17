@@ -12,7 +12,7 @@ class Enemy : public Character
 
 	private:
 		RectRenderer rectRenderer;
-		float getRandomVelocityY();
+		Vector2 downwardForce;
 };
 
 

@@ -1,7 +1,5 @@
 #include "EnemyManager.h"
-#include <random>
 #include <iostream>
-using namespace std;
 
 EnemyManager::EnemyManager() {
 	maxEnemies = 0;
@@ -56,11 +54,6 @@ void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager
 
 Vector2 EnemyManager::getRandomEnemySpawnPos(Vector2 windowSize)
 {
-	random_device rd;
-	mt19937 mt(rd());
-	uniform_real_distribution<float> dist(0, windowSize.x - 100); // Range is from 0.0f to t
-
-	float randomX = dist(mt);
-
+	float randomX = Math::randomRange(0, windowSize.x - 100);
 	return Vector2(randomX, 0);
 }

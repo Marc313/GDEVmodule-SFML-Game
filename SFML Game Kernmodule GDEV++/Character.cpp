@@ -5,6 +5,7 @@ using namespace std;
 Character::Character() 
 {
     collider = BoxCollider();
+    physicsComponent = PhysicsComponent(1);
     startPos = Vector2();
     position = startPos;
 }
@@ -19,23 +20,13 @@ Character& Character::operator=(const Character& character)
     size = character.size;
     startPos = character.startPos;
     position = character.position;
-    velocity = character.velocity;
+    physicsComponent = character.physicsComponent;
 
     return *this;
 }
 
 Vector2 Character::calculateNewPosition() {
-    float friction = physicsComponent.CalculateFriction();
-
-    Vector2 movement;
-    if (Math::Abs(velocity.x) > friction) {
-        movement.x = velocity.x - friction;
-    }
-    if (Math::Abs(velocity.y) > friction) {
-        movement.y = velocity.y - friction;
-    }
-
-    return position + movement;
+    return position + physicsComponent.velocity;
 }
 
 void Character::onUpdate(sf::RenderWindow& window)
