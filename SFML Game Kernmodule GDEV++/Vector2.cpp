@@ -1,4 +1,5 @@
 #include "Vector2.h"
+#include <iostream>
 
 Vector2::Vector2() {
 	x = 0;
@@ -17,16 +18,6 @@ Vector2& Vector2::operator=(const Vector2& v)
 	return *this;
 }
 
-sf::Vector2f Vector2::ToSFMLVector2f()
-{
-	return sf::Vector2f(x, y);
-}
-
-sf::Vector2i Vector2::ToSFMLVector2i()
-{
-	return sf::Vector2i(x, y);
-}
-
 Vector2 Vector2::operator+(Vector2 otherVector)
 {
 	return Vector2(x + otherVector.x, y + otherVector.y);
@@ -37,7 +28,37 @@ Vector2 Vector2::operator-(Vector2 otherVector)
 	return Vector2(x - otherVector.x, y - otherVector.y);
 }
 
+Vector2 Vector2::operator*(float scalar)
+{
+	return Vector2(x * scalar, y * scalar);
+}
+
+Vector2 Vector2::operator/(float scalar)
+{
+	if (scalar == 0) 
+	{
+		std::cout << "Dividing by 0 not allowed, operation ignored" << std::endl;
+		return Vector2(x, y);
+	}
+	else 
+	{
+		return Vector2(x / scalar, y / scalar);
+	}
+}
+
+// Public Methods //
+
+sf::Vector2f Vector2::ToSFMLVector2f()
+{
+	return sf::Vector2f(x, y);
+}
+
+sf::Vector2i Vector2::ToSFMLVector2i()
+{
+	return sf::Vector2i(x, y);
+}
+
 std::string Vector2::to_string() {
-	return "x: " + std::to_string(x) + " y: " + std::to_string(y) + "\n";
+	return "x: " + std::to_string(x) + " y: " + std::to_string(y);
 }
 

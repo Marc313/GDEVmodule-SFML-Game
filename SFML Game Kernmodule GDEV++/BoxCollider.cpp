@@ -1,5 +1,7 @@
 #include "BoxCollider.h"
 
+// Constructors //
+
 BoxCollider::BoxCollider()
 {
 	topY = 0;
@@ -21,6 +23,8 @@ BoxCollider& BoxCollider::operator=(const BoxCollider& boxCollider) {
 	return *this;
 }
 
+// Public Methods //
+
 bool BoxCollider::isCollidingWith(BoxCollider other)
 {
 	calculateCorners();
@@ -35,10 +39,26 @@ bool BoxCollider::isCollidingWith(BoxCollider other)
 	return false;
 }
 
-//void BoxCollider::updateSize(Vector2 newSize)
-//{
-//	size = newSize;
-//}
+// Currently unused: replaced with clamping.
+bool BoxCollider::isCollidingWithSideBorders(sf::RenderWindow& window) 
+{
+	sf::Vector2u windowSizeSFML = window.getSize();
+	Vector2 windowSize = Vector2(windowSizeSFML.x, windowSizeSFML.y);
+
+	calculateCorners();
+	if (leftX < 0 || rightX > windowSize.x) return true;
+	return false;
+}
+
+bool BoxCollider::hasPassedBottomBorder(sf::RenderWindow& window)
+{
+	sf::Vector2u windowSizeSFML = window.getSize();
+	Vector2 windowSize = Vector2(windowSizeSFML.x, windowSizeSFML.y);
+
+	calculateCorners();
+	if (topY > windowSize.y) return true;
+	return false;
+}
 
 void BoxCollider::updatePosition(Vector2 newPos)
 {

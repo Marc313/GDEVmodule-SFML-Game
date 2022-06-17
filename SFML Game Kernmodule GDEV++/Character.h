@@ -14,18 +14,19 @@ class Character
 		// Variables
 		Vector2 size;
 		Vector2 position;
-		Vector2 velocity;
 		BoxCollider collider;
 
 		// Methods
 		Character();
-		//Character(Vector2 size, sf::Color shapeColor);
 		Character& operator=(const Character& character);
-		Vector2 calculateNewPosition();
 		void onUpdate(sf::RenderWindow& window);
 
 	protected:
 		Vector2 startPos;
 		PhysicsComponent physicsComponent;
+
+		// Private Methods //
+		Vector2 calculateNewPosition();
+		void onSideBorderCollision();
 };
 

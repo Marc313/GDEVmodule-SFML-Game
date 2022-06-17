@@ -33,9 +33,9 @@ void Game::startGame()
 {
 	hasEnded = false;
 	difficulty = 1;
-	restartTimer = restartGameTime;
+	restartTimer = Timer(restartGameTime);
 
-	player = Player(Vector2(50.0f, 50.0f), sf::Color::Green);
+	player = Player(Vector2(35.0f, 50.0f), sf::Color::Green);
 	enemyManager = EnemyManager(3);
 	scoreManager = ScoreManager();
 }
@@ -77,7 +77,7 @@ void Game::drawGameOverText()
 }
 
 // Public Methods //
-void Game::onUpdate(float deltaTime)
+void Game::onUpdate()
 {
 	pollEvents();
 
@@ -97,8 +97,8 @@ void Game::onUpdate(float deltaTime)
 	}
 	else 
 	{
-		restartTimer -= deltaTime;
-		if (restartTimer <= 0) {
+		restartTimer.tick();
+		if (restartTimer.getTimeLeft() <= 0) {
 			startGame();
 		}
 	}

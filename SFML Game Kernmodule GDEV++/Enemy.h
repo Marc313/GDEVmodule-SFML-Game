@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h";
+#include "Timer.h";
 
 class Enemy : public Character
 {
@@ -12,7 +13,14 @@ class Enemy : public Character
 
 	private:
 		RectRenderer rectRenderer;
-		float getRandomVelocityY();
+		Vector2 downwardForce;
+		Timer acceleratingTimer;
+		Timer brakingTimer;
+		bool isAccelerating;
+
+		void tickTimers();
+		void switchToAccelerating();
+		void switchToBraking();
 };
 
 
