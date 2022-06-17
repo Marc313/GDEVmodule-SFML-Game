@@ -1,18 +1,39 @@
-#include <SFML/Window.hpp>;
-#include "Player.h";
-#include <IOStream>;
+#include "Player.h" 
+#include <SFML/Window.hpp>
+#include <iostream>
 
-Player::Player(float squareSize, sf::Color playerColor)
+// Constructors //
+
+Player::Player()
 {
-    rectRenderer = RectRenderer((int)squareSize, (int)squareSize, playerColor);
-    this->position = startPos;
+    lives = 1;
+    horizontalInput = 0;
+}
+
+Player::Player(Vector2 playerSize, sf::Color playerColor)
+{
+    lives = 1;
+    size = playerSize;
+    startPos = Vector2(500, 750);
+    position = startPos;
+    collider = BoxCollider(size, position);
+    rectRenderer = RectRenderer((int) playerSize.x, (int) playerSize.y, playerColor);
+}
+
+Player& Player::operator=(const Player& player)
+{
+    Character::operator=(player);
+    lives = player.lives;
+    collider = player.collider;
+    rectRenderer = player.rectRenderer;
+
+    return *this;
 }
 
 void Player::onUpdate(sf::RenderWindow& window) {
-    std::cout << "Player" << std::endl;
-
-    input = getMouseInputX();
-    position = Vector2(input, position.y);
+    horizontalInput = getInputHorizontal();
+    position = Vector2(position.x + horizontalInput * 10, position.y);
+    collider.updatePosition(position);
     rectRenderer.SetShapePosition(position);
     draw(window);
 }
@@ -22,8 +43,31 @@ void Player::draw(sf::RenderWindow& window)
     rectRenderer.drawShape(window);
 }
 
-float Player::getMouseInputX()
+void Player::onCollision()
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition();
-    return mousePos.x;
+    // Set alpha lower for a few seconds
+    lives--;
+}
+
+int Player::getLives()
+{
+    return lives;
+}
+
+int Player::getInputHorizontal()
+{
+    int horizontal = 0;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)
+        || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) 
+    {
+        horizontal = -1;
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)
+        || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) 
+    {
+        horizontal = 1;
+    }
+
+    return horizontal;
 }

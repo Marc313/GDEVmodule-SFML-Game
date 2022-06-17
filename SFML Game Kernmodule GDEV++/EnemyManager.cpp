@@ -1,6 +1,11 @@
 #include "EnemyManager.h"
 #include <random>
+#include <iostream>
 using namespace std;
+
+EnemyManager::EnemyManager() {
+	maxEnemies = 0;
+}
 
 EnemyManager::EnemyManager(int maxEnemies)
 {
@@ -11,7 +16,7 @@ void EnemyManager::SpawnEnemy(Vector2 windowSize)
 {
 	Vector2 randomPos = getRandomEnemySpawnPos(windowSize);
 	
-	Enemy enemy = Enemy(100.0f, sf::Color::Red, randomPos);
+	Enemy enemy = Enemy(Vector2(100.0f, 100.0f), sf::Color::Red, randomPos);
 	enemies.push_back(enemy);
 }
 
@@ -20,7 +25,7 @@ void EnemyManager::RespawnEnemy(Enemy& enemy, Vector2 windowSize)
 	enemy.position = getRandomEnemySpawnPos(windowSize);
 }
 
-void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager)
+void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager, Player& player)
 {
 	// Make a window manager?
 	sf::Vector2u windowSizeSFML = window.getSize();
@@ -29,11 +34,17 @@ void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager
 	// Update each enemy
 	for (Enemy& enemy : enemies)
 	{
-		enemy.onUpdate(window);
+		// Check Border Collision
 		if (enemy.isOutOfScreen(window)) 
 		{
 			scoreManager.increaseScore(1);
 			RespawnEnemy(enemy, windowSize);
+		}
+		enemy.onUpdate(window);
+
+		// Check collision with Player
+		if (enemy.collider.isCollidingWith(player.collider)) {
+			player.onCollision();
 		}
 	}
 

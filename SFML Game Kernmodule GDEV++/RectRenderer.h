@@ -4,11 +4,11 @@
 class RectRenderer : public ShapeRenderer
 {
 	public:
-		int width;
-		int height;
+		float width;
+		float height;
 
 		RectRenderer();
-		RectRenderer(int rectWidth, int rectHeight, sf::Color shapeColor);
+		RectRenderer(float rectWidth, float rectHeight, sf::Color shapeColor);
 		void drawShape(sf::RenderWindow& window);
 
 	private:

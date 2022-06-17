@@ -1,22 +1,24 @@
-#include "Enemy.h";
-#include <IOStream>;
+#include "Enemy.h"
+#include <iostream>
+#include <random>
+using namespace std;
 
-Enemy::Enemy(int squareSize, sf::Color enemyColor, Vector2 startPos)
+Enemy::Enemy(Vector2 size, sf::Color enemyColor, Vector2 startPos)
 {
-	velocity.y = 6;
+	this->size = size;
+	velocity.y = getRandomVelocityY();
 	position = startPos;
-	rectRenderer = RectRenderer(squareSize, squareSize, enemyColor);
+	collider = BoxCollider(size, position);
+	rectRenderer = RectRenderer(size.x, size.y, enemyColor);
 }
 
 void Enemy::onUpdate(sf::RenderWindow& window)
 {
 	position = calculateNewPosition();
+	collider.updatePosition(position);
 	rectRenderer.SetShapePosition(position);
 
 	draw(window);
-
-	
-	//std::cout << position.to_string();
 }
 
 bool Enemy::isOutOfScreen(sf::RenderWindow& window) 
@@ -34,4 +36,14 @@ bool Enemy::isOutOfScreen(sf::RenderWindow& window)
 void Enemy::draw(sf::RenderWindow& window)
 {
 	rectRenderer.drawShape(window);
+}
+
+float Enemy::getRandomVelocityY() {
+	random_device rd;
+	mt19937 mt(rd());
+	uniform_real_distribution<float> dist(15, 20);
+
+	float randomY = dist(mt);
+
+	return randomY;
 }

@@ -1,28 +1,49 @@
 #pragma once
-#include "Vector2.h";
-#include "Player.h";
-#include "EnemyManager.h";
-#include "ScoreManager.h";
+
+#include "Vector2.h"
+#include "Player.h"
+#include "EnemyManager.h"
 
 class Game
 {
 	public:
-		Vector2 windowSize;
-
+		// Public Variables //
 		Game();
-		~Game();
-		void pollEvents();
-		void onUpdate();
+		virtual ~Game();
+
+		// Public Methods //
+		void onUpdate(float deltaTime);
 		bool isRunning();
 
+		// Public Methods //
+		void checkDifficultyIncrease();
+		void checkPlayerLives();
+		void setDifficulty(int difficulty);
+		bool getHasEnded();
+
 	private:
-		Player* player;
-		EnemyManager* enemyManager;
-		ScoreManager* scoreManager;
+		// Private Variables //
+		Player player;
+		EnemyManager enemyManager;
+		ScoreManager scoreManager;
 
-		sf::RenderWindow* renderWindow;
+		bool hasEnded;
+		int difficulty;
+		const float restartGameTime = 3.0f;
+		float restartTimer;
 
-		void CreateWindow();
-		void StartGame();
+		Vector2 windowSize;
+		sf::RenderWindow* window;
+		sf::Text gameOverText;
+		sf::Font font;
+
+		// Private Methods //
+		void createWindow();
+		void initializeText();
+		void startGame();
+		void endGame();
+		void pollEvents();
+		void drawGameOverText();
+
 };
 

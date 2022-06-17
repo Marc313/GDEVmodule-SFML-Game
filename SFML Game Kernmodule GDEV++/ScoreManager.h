@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 
 class ScoreManager
@@ -7,6 +8,7 @@ class ScoreManager
 		int score;
 
 		ScoreManager();
+		//~ScoreManager();
 		void increaseScore(int value);
 		void onUpdate(sf::RenderWindow& window);
 

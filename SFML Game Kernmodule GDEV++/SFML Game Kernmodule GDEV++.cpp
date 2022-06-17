@@ -6,22 +6,15 @@ int main()
 {
     Game game = Game();
 
-    /*Player player = Player(50.0f, sf::Color::Green);
-    EnemyManager enemyManager = EnemyManager(5);
-    ScoreManager scoreManager = ScoreManager();*/
-
+    sf::Clock clock;
+    float oldTime = 0;
     while (game.isRunning())
     {
+        float newTime = clock.restart().asSeconds();
+        float deltaTime = (newTime - oldTime);
+
         // Update
-        game.onUpdate();
-
-        /*renderWindow.clear();
-
-        player.onUpdate(renderWindow);
-        enemyManager.onUpdate(renderWindow);
-        scoreManager.onUpdate(renderWindow)
-
-        renderWindow.display();*/
+        game.onUpdate(deltaTime);
     }
 
     return 0;
