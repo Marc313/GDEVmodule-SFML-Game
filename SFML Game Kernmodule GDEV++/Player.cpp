@@ -2,6 +2,8 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 
+// Constructors //
+
 Player::Player()
 {
     horizontalInput = 0;
@@ -29,7 +31,6 @@ Player& Player::operator=(const Player& player)
 void Player::onUpdate(sf::RenderWindow& window) {
     horizontalInput = getInputHorizontal();
     position = Vector2(position.x + horizontalInput * 10, position.y);
-    //collider.updateSize(size);
     collider.updatePosition(position);
     rectRenderer.SetShapePosition(position);
     draw(window);

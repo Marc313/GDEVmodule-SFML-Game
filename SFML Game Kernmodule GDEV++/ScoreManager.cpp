@@ -1,4 +1,5 @@
 #include "ScoreManager.h"
+#include "Game.h"
 
 ScoreManager::ScoreManager() 
 {
@@ -27,11 +28,40 @@ void ScoreManager::increaseScore(int value)
 {
 	score += value;
 	text.setString(std::to_string(score));
+
+	//checkDifficultyIncrease();
 }
 
 void ScoreManager::onUpdate(sf::RenderWindow& window)
 {
 	window.draw(text);
 }
+
+//void ScoreManager::checkDifficultyIncrease()
+//{
+//	int difficulty = 1;
+//
+//	if (score < 10) {
+//		difficulty = 1;
+//	} 
+//	else if (score < 25) {
+//		difficulty = 2;
+//	}
+//	else if (score < 50) {
+//		difficulty = 3;
+//	}
+//	else {
+//		// After a certain point, increase the difficulty every 100 points
+//		for (int i = 1; i < 50; i++)
+//		{
+//			if (score < 100 * i) {
+//				difficulty = 3 + i;
+//				break;
+//			}
+//		}
+//	}
+//
+//	game.setDifficulty(difficulty);
+//}
 
 

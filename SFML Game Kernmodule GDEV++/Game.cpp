@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "ScoreManager.h"
 
 Game::Game()
 {
@@ -9,6 +10,27 @@ Game::Game()
 Game::~Game()
 {
 	delete renderWindow;
+}
+
+// Private Methods //
+void Game::CreateWindow()
+{
+	windowSize = Vector2(1000, 1000);
+	renderWindow = new sf::RenderWindow(sf::VideoMode(windowSize.x, windowSize.y), "Avoid the cubes");
+	renderWindow->setFramerateLimit(60);
+}
+
+void Game::StartGame()
+{
+	difficulty = 1;
+	player = Player(Vector2(50.0f, 50.0f), sf::Color::Green);
+	enemyManager = EnemyManager(3);
+	scoreManager = ScoreManager();
+}
+
+void Game::EndGame()
+{
+	StartGame();
 }
 
 void Game::pollEvents()
@@ -25,6 +47,7 @@ void Game::pollEvents()
 	}
 }
 
+// Public Methods //
 void Game::onUpdate(float deltaTime)
 {
 	pollEvents();
@@ -43,19 +66,16 @@ bool Game::isRunning()
 	return renderWindow->isOpen();
 }
 
-void Game::CreateWindow()
+// Public Static Methods //
+
+void Game::onPlayerDied()
 {
-	windowSize = Vector2(1920, 1080);
-	renderWindow = new sf::RenderWindow(sf::VideoMode(windowSize.x, windowSize.y), "Avoid the cubes");
-	renderWindow->setFramerateLimit(60);
+
 }
 
-void Game::StartGame()
+void Game::setDifficulty(int difficulty)
 {
-	player = Player(Vector2(50.0f, 50.0f), sf::Color::Green);
-	enemyManager =  EnemyManager(5);
-	scoreManager =  ScoreManager();
+	this->difficulty = difficulty;
+	enemyManager.maxEnemies = difficulty + 2;
 }
-
-
 

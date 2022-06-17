@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 
 class ScoreManager
@@ -13,5 +14,6 @@ class ScoreManager
 
 	private:
 		sf::Text text;
+		//void checkDifficultyIncrease();
 };
 

@@ -7,20 +7,21 @@
 class Player : public Character
 {
 	public:
-		// Constructor - Destructor
+		// Constructors //
 		Player();
 		Player(Vector2 size, sf::Color playerColor);
 		Player& operator=(const Player& player);
 		
+		// Public Methods //
 		void onUpdate(sf::RenderWindow& window);
 		void draw(sf::RenderWindow& window);
 
-		// Setter
-		int getInputHorizontal();
-
 	private:
+		// Private Variables //
 		RectRenderer rectRenderer;
 		int horizontalInput;
-		
+
+		// Private Methods //
+		int getInputHorizontal();
 };
 
