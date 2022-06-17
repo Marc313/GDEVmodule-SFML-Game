@@ -19,7 +19,7 @@ Player::Player(Vector2 playerSize, sf::Color playerColor)
 
     collider = BoxCollider(size, position);
     rectRenderer = RectRenderer((int) playerSize.x, (int) playerSize.y, playerColor);
-    physicsComponent = PhysicsComponent(.6f);
+    physicsComponent = PhysicsComponent(.65f);
 }
 
 Player& Player::operator=(const Player& player)
@@ -35,12 +35,8 @@ Player& Player::operator=(const Player& player)
 void Player::onUpdate(sf::RenderWindow& window) {
     horizontalInput = getInputHorizontal();
     physicsComponent.addForce(Vector2(3 * horizontalInput, 0));
-    physicsComponent.onUpdate();
-    std::cout << "Acceleration: " + physicsComponent.acceleration.to_string() << std::endl;
-    std::cout << "Velocity: " + physicsComponent.velocity.to_string() << std::endl;
-    position = calculateNewPosition();
+    Character::onUpdate(window);
 
-    collider.updatePosition(position);
     rectRenderer.SetShapePosition(position);
 
     draw(window);

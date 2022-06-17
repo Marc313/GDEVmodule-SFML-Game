@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "Player.h"
 #include "EnemyManager.h"
+#include "Timer.h"
 
 class Game
 {
@@ -12,7 +13,7 @@ class Game
 		virtual ~Game();
 
 		// Public Methods //
-		void onUpdate(float deltaTime);
+		void onUpdate();
 		bool isRunning();
 
 		// Public Methods //
@@ -30,7 +31,7 @@ class Game
 		bool hasEnded;
 		int difficulty;
 		const float restartGameTime = 3.0f;
-		float restartTimer;
+		Timer restartTimer;
 
 		Vector2 windowSize;
 		sf::RenderWindow* window;

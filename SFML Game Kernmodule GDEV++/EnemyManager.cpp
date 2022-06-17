@@ -25,19 +25,19 @@ void EnemyManager::RespawnEnemy(Enemy& enemy, Vector2 windowSize)
 
 void EnemyManager::onUpdate(sf::RenderWindow& window, ScoreManager& scoreManager, Player& player)
 {
-	// Make a window manager?
 	sf::Vector2u windowSizeSFML = window.getSize();
 	Vector2 windowSize = Vector2(windowSizeSFML.x, windowSizeSFML.y);
 	
 	// Update each enemy
 	for (Enemy& enemy : enemies)
 	{
-		// Check Border Collision
-		if (enemy.isOutOfScreen(window)) 
+		// Check Bottom Border Collision
+		if (enemy.collider.hasPassedBottomBorder(window)) 
 		{
 			scoreManager.increaseScore(1);
 			RespawnEnemy(enemy, windowSize);
 		}
+
 		enemy.onUpdate(window);
 
 		// Check collision with Player

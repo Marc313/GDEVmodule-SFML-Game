@@ -22,5 +22,12 @@ float Math::randomRange(float min, float max)
 
     return dist(mt);
 }
+// Returns either 1 or -1
+int Math::getRandomSign()
+{
+    float random = Math::randomRange(0.0f, 1.0f);
+    if (random < 0.50f) return -1;
+    else return 1;
+}
 
 
