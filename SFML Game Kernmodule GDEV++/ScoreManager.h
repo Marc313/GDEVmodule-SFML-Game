@@ -8,6 +8,7 @@ class ScoreManager
 		int score;
 
 		ScoreManager();
+		ScoreManager& operator=(const ScoreManager& scoreManager);
 		void increaseScore(int value);
 };
 

@@ -27,7 +27,8 @@ void Game::startGame()
 
 	player = Player(Vector2(35.0f, 50.0f), sf::Color::Green);
 	enemyManager = EnemyManager(3);
-	// UIManager and ScoreManager just use the default constructor
+	scoreManager = ScoreManager();
+	// UIManager uses default constructor and doesn't need to be replaced when restarting game.
 }
 
 void Game::endGame()
