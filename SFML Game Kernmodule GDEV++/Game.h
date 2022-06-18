@@ -3,6 +3,8 @@
 #include "Vector2.h"
 #include "Player.h"
 #include "EnemyManager.h"
+#include "ScoreManager.h"
+#include "UIManager.h"
 #include "Timer.h"
 
 class Game
@@ -27,6 +29,7 @@ class Game
 		Player player;
 		EnemyManager enemyManager;
 		ScoreManager scoreManager;
+		UIManager uiManager;
 
 		bool hasEnded;
 		int difficulty;
@@ -35,12 +38,9 @@ class Game
 
 		Vector2 windowSize;
 		sf::RenderWindow* window;
-		sf::Text gameOverText;
-		sf::Font font;
 
 		// Private Methods //
 		void createWindow();
-		void initializeText();
 		void startGame();
 		void endGame();
 		void pollEvents();

@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "Character.h"
 #include <SFML/Graphics.hpp>
+#include "Timer.h"
 
 class Player : public Character
 {
@@ -24,7 +25,11 @@ class Player : public Character
 		int horizontalInput;
 		int lives;
 
+		bool isInvincable;
+		Timer invincabilityTimer;
+
 		// Private Methods //
 		int getInputHorizontal();
+		void tickInvincabilityTimer();
 };
 

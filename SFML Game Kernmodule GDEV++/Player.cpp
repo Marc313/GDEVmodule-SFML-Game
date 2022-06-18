@@ -6,16 +6,18 @@
 
 Player::Player()
 {
-    lives = 1;
+    lives = 3;
     horizontalInput = 0;
+    invincabilityTimer = Timer(1.0f);
 }
 
 Player::Player(Vector2 playerSize, sf::Color playerColor)
 {
-    lives = 1;
+    lives = 3;
     size = playerSize;
     startPos = Vector2(500, 750);
     position = startPos;
+    invincabilityTimer = Timer(1.0f);
 
     collider = BoxCollider(size, position);
     rectRenderer = RectRenderer((int) playerSize.x, (int) playerSize.y, playerColor);
@@ -38,6 +40,7 @@ void Player::onUpdate(sf::RenderWindow& window) {
     Character::onUpdate(window);
 
     rectRenderer.SetShapePosition(position);
+    if (isInvincable) tickInvincabilityTimer();
 
     draw(window);
 }
@@ -49,8 +52,12 @@ void Player::draw(sf::RenderWindow& window)
 
 void Player::onCollision()
 {
+    if (isInvincable) return;
+
     // Set alpha lower for a few seconds
+    rectRenderer.setAlpha(100);
     lives--;
+    isInvincable = true;
 }
 
 int Player::getLives()
@@ -74,4 +81,14 @@ int Player::getInputHorizontal()
     }
 
     return horizontal;
+}
+
+void Player::tickInvincabilityTimer()
+{
+    invincabilityTimer.tick();
+    if (invincabilityTimer.getTimeLeft() < 0) {
+        isInvincable = false;
+        rectRenderer.setAlpha(255);
+        invincabilityTimer.reset();
+    }
 }

@@ -3,6 +3,7 @@
 
 int main()
 {
+    // Since game uses default constructor, is it better just do 'Game game;' ?
     Game game = Game();
 
     float oldTime = 0;

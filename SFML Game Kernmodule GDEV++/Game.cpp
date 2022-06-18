@@ -1,10 +1,8 @@
 #include "Game.h"
-#include "ScoreManager.h"
 
 Game::Game()
 {
 	createWindow();
-	initializeText();
 	startGame();
 }
 
@@ -21,14 +19,6 @@ void Game::createWindow()
 	window->setFramerateLimit(60);
 }
 
-void Game::initializeText()
-{
-	font.loadFromFile("Resources/PTSerif-Regular.ttf");
-
-	gameOverText.setFont(font);
-	gameOverText.setCharacterSize(50);
-}
-
 void Game::startGame()
 {
 	hasEnded = false;
@@ -37,7 +27,7 @@ void Game::startGame()
 
 	player = Player(Vector2(35.0f, 50.0f), sf::Color::Green);
 	enemyManager = EnemyManager(3);
-	scoreManager = ScoreManager();
+	// UIManager and ScoreManager just use the default constructor
 }
 
 void Game::endGame()
@@ -64,16 +54,7 @@ void Game::pollEvents()
 
 void Game::drawGameOverText()
 {
-	gameOverText.setString("Game over! \nScore: " + std::to_string(scoreManager.score));
-
-	// Set the text to the middle of the screen
-	float textWidth = gameOverText.getLocalBounds().width;
-	float textHeight = gameOverText.getLocalBounds().height;
-	float textX = (windowSize.x - textWidth)/2;
-	float textY = (windowSize.y - textHeight)/2;
-	gameOverText.setPosition(textX, textY);
-
-	window->draw(gameOverText);
+	uiManager.drawGameOverScreen(*window, scoreManager.score);
 }
 
 // Public Methods //
@@ -87,7 +68,7 @@ void Game::onUpdate()
 
 		player.onUpdate(*window);
 		enemyManager.onUpdate(*window, scoreManager, player);
-		scoreManager.onUpdate(*window);
+		uiManager.onUpdate(*window, player.getLives(), scoreManager.score);
 		// I wanted to trigger this function in the scoreManager whenever increaseScore was called.
 		// I don't know how to efficiently call upon the Game class function, referencing the game object was very messy.
 		checkDifficultyIncrease();
