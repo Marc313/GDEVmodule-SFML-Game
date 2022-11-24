@@ -8,7 +8,7 @@ class EnemyManager
 {
 	public:
 		std::vector<Enemy> enemies;
-		int maxEnemies = 5;
+		int maxEnemies;
 
 		EnemyManager();
 		EnemyManager(int maxEnemies);

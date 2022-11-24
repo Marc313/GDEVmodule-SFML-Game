@@ -18,8 +18,6 @@ class PhysicsComponent
 	private:
 		float mass;
 		float frictionValue = 2;
-		//const float gravitationalConstant = 9.81f;
-		//const float frictionCoefficient = 0.2f;		// Coefficient value for metal on wood
 		const float minVelocity = -20;
 		const float maxVelocity = 20;
 };
